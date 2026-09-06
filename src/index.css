@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FDEDE6;
+  color: #1E2022;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
