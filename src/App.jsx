@@ -2,6 +2,9 @@ import React from 'react'
 import BackgroundCanvas from './components/ui/BackgroundCanvas'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
+import SelectedWork from './components/sections/SelectedWork'
+import TechnicalWork from './components/sections/TechnicalWork'
+import Capabilities from './components/sections/Capabilities'
 
 export default function App() {
   return (
@@ -10,6 +13,9 @@ export default function App() {
       <Navbar />
       <main className='relative z-10'>
         <Hero />
+        <SelectedWork />
+        <TechnicalWork />
+        <Capabilities />
       </main>
     </div>
   )

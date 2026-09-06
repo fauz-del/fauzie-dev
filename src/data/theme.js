@@ -1,0 +1,1 @@
+export const accentGlowColors = ['#E07A5F', '#38BDF8', '#84A98C', '#F4A261']

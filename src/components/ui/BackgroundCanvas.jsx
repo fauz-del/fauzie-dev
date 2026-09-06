@@ -54,7 +54,7 @@ export default function BackgroundCanvas() {
           const dy = mouseY - y
           const dist = Math.sqrt(dx * dx + dy * dy)
 
-          let radius = 0.7
+          let radius = 1
          
           const blue = { r: 56, g: 189, b: 248 }
           const gold = { r: 244, g: 162, b: 97 }
@@ -67,7 +67,7 @@ export default function BackgroundCanvas() {
 
           if (dist < maxDist) {
             const factor = 1 - dist / maxDist
-            radius = 0.7 + factor * 4.5
+            radius = 1 + factor * 4.5
             alpha = 0.25 + factor * 0.55
  
           }

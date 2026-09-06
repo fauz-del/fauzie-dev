@@ -1,27 +1,6 @@
 import React, { useEffect, useRef, useState, Children, cloneElement, isValidElement } from 'react'
 
-/**
- * WebGLTextReveal
- * ----------------
- * Wraps heading text (including colored inline <span> segments) and reveals it
- * with a GPU dissolve wipe on mount, instead of a plain fade/slide.
- *
- * How it works:
- * 1. Renders the real text, split word-by-word, but invisible (visibility: hidden)
- *    so the browser still computes real wrapping/line-breaks/spacing for us.
- * 2. Reads each word's actual on-screen rect + computed color, and paints them
- *    onto an offscreen 2D canvas at those exact positions. This gives a
- *    pixel-accurate texture without re-implementing text layout.
- * 3. Uploads that as a WebGL texture and reveals it with a noisy diagonal wipe.
- * 4. When the wipe finishes, the canvas fades out and the real (invisible) text
- *    becomes visible — so it stays selectable, accessible, and SEO-friendly.
- *
- * Falls back to a plain instant reveal if WebGL is unavailable or the user
- * has prefers-reduced-motion enabled.
- */
 
-// Recursively split children into word-level spans, preserving className/style
-// of any wrapping element (e.g. the colored <span>s in the headline).
 function splitIntoWordSpans(children, keyPrefix = 'w') {
   let key = 0
   const walk = (nodes) =>
