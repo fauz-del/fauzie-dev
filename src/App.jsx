@@ -5,6 +5,8 @@ import Hero from './components/sections/Hero'
 import SelectedWork from './components/sections/SelectedWork'
 import TechnicalWork from './components/sections/TechnicalWork'
 import Capabilities from './components/sections/Capabilities'
+import About from './components/sections/About'
+import Contact from './components/sections/Contact'
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
         <SelectedWork />
         <TechnicalWork />
         <Capabilities />
+        <About />
+        <Contact />
       </main>
     </div>
   )
