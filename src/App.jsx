@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import SelectedWork from './components/sections/SelectedWork'
 import TechnicalWork from './components/sections/TechnicalWork'
+import SectionDictionary from './components/sections/SectionDictionary'
 import Capabilities from './components/sections/Capabilities'
 import About from './components/sections/About'
 import Contact from './components/sections/Contact'
@@ -17,6 +18,7 @@ export default function App() {
         <Hero />
         <SelectedWork />
         <TechnicalWork />
+        <SectionDictionary />
         <Capabilities />
         <About />
         <Contact />

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, Children, cloneElement, isValidElement } from 'react'
 
-
 function splitIntoWordSpans(children, keyPrefix = 'w') {
   let key = 0
   const walk = (nodes) =>
@@ -33,10 +32,12 @@ export default function WebGLTextReveal({
   duration = 1300,
   delay = 0,
   onDone,
+  playOnView = false,
 }) {
   const containerRef = useRef(null)
   const canvasRef = useRef(null)
   const [done, setDone] = useState(false)
+  const doneRef = useRef(false)
   const [canvasVisible, setCanvasVisible] = useState(true)
 
   useEffect(() => {
@@ -49,24 +50,28 @@ export default function WebGLTextReveal({
     const canvas = canvasRef.current
     if (!container || !canvas) return
 
-    if (reduceMotion) {
+    const finish = () => {
       setCanvasVisible(false)
       setDone(true)
+      doneRef.current = true
       onDone && onDone()
+    }
+
+    if (reduceMotion) {
+      finish()
       return
     }
 
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false })
     if (!gl) {
-      setCanvasVisible(false)
-      setDone(true)
-      onDone && onDone()
+      finish()
       return
     }
 
     let raf
     let startTime = null
     let destroyed = false
+    let observer = null
 
     const vertSrc = `
       attribute vec2 aPos;
@@ -170,7 +175,6 @@ export default function WebGLTextReveal({
         ctx.fillStyle = cs.color
         ctx.textBaseline = 'alphabetic'
         const x = wr.left - rect.left
-        // approximate baseline from font metrics
         const fontSizePx = parseFloat(cs.fontSize)
         const y = wr.top - rect.top + fontSizePx * 0.87
         ctx.fillText(word.textContent, x, y)
@@ -204,25 +208,37 @@ export default function WebGLTextReveal({
         raf = requestAnimationFrame(draw)
       } else {
         setTimeout(() => {
-          if (!destroyed) {
-            setCanvasVisible(false)
-            setDone(true)
-            onDone && onDone()
-          }
+          if (!destroyed) finish()
         }, 120)
       }
     }
 
-    // wait one frame so fonts/layout are settled before measuring
-    const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()
-    fontsReady.then(() => {
-      if (destroyed) return
-      buildTextureFromDOM()
-      raf = requestAnimationFrame(draw)
-    })
+    const startAnimation = () => {
+      const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()
+      fontsReady.then(() => {
+        if (destroyed) return
+        buildTextureFromDOM()
+        raf = requestAnimationFrame(draw)
+      })
+    }
+
+    if (playOnView) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            startAnimation()
+            observer.disconnect()
+          }
+        },
+        { threshold: 0.4 }
+      )
+      observer.observe(container)
+    } else {
+      startAnimation()
+    }
 
     const onResize = () => {
-      if (done) return
+      if (doneRef.current) return
       buildTextureFromDOM()
     }
     window.addEventListener('resize', onResize)
@@ -231,6 +247,7 @@ export default function WebGLTextReveal({
       destroyed = true
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', onResize)
+      if (observer) observer.disconnect()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

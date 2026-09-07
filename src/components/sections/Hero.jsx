@@ -4,42 +4,7 @@ import { ArrowDown } from 'lucide-react'
 import WebGLTextReveal from '../ui/WebGLTextReveal'
 import TiltPhotoCard from '../ui/TiltPhotoCard'
 import myPhoto from '../../assets/my-photo.jpeg'
-
-function MagneticLink({ href, className, children }) {
-  const ref = useRef(null)
-  const reduceMotion = useReducedMotion()
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const sx = useSpring(x, { stiffness: 200, damping: 15, mass: 0.4 })
-  const sy = useSpring(y, { stiffness: 200, damping: 15, mass: 0.4 })
-
-  const handleMove = (e) => {
-    if (reduceMotion || !ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const relX = e.clientX - (rect.left + rect.width / 2)
-    const relY = e.clientY - (rect.top + rect.height / 2)
-    x.set(relX * 0.25)
-    y.set(relY * 0.35)
-  }
-  const handleLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <motion.a
-      ref={ref}
-      href={href}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      style={{ x: sx, y: sy }}
-      whileTap={{ scale: 0.96 }}
-      className={className}
-    >
-      {children}
-    </motion.a>
-  )
-}
+import MagneticLink from '../ui/MagneticLink'
 
 export default function Hero() {
   const [headlineDone, setHeadlineDone] = useState(false)
