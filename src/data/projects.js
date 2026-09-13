@@ -1,7 +1,8 @@
 import fieldNoteImg from '../assets/field-note.jpeg'
 import roofingImg from '../assets/northline-roofing.jpeg'
-import dentalImg from '../assets/dental-website.png'
-import petGroomingImg from '../assets/pet-grooming.png'
+import dentalImg from '../assets/dental-website.jpeg'
+import petGroomingImg from '../assets/pet-grooming.jpeg'
+import roastRyeImg from '../assets/roast-&-rye.jpeg'
 
 export const selectedWork = [
   {
@@ -18,7 +19,7 @@ export const selectedWork = [
     id: 'roast-rye',
     name: 'Roast & Rye',
     category: 'Coffee / Hospitality',
-    image: null,
+    image: roastRyeImg,
     intro: 'A warm coffee experience combining cinematic imagery, scroll-driven motion and interactive storytelling.',
     stack: ['HTML', 'CSS', 'JavaScript'],
     liveUrl: 'https://fauz-del.github.io/section-dictionary/websites/004-roast-rye/',

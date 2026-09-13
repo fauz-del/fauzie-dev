@@ -1,129 +1,194 @@
-import React, { useRef, useState } from 'react'
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
-import { ArrowDown } from 'lucide-react'
-import WebGLTextReveal from '../ui/WebGLTextReveal'
-import TiltPhotoCard from '../ui/TiltPhotoCard'
+import React from 'react'
+import { ArrowDown, ArrowUpRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 import myPhoto from '../../assets/my-photo.jpeg'
-import MagneticLink from '../ui/MagneticLink'
 
 export default function Hero() {
-  const [headlineDone, setHeadlineDone] = useState(false)
-
   return (
-    <section className='relative min-h-screen pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 overflow-hidden'>
-      {/* ambient drifting color blob — shifted left-of-center so it sits behind the text column, not the photo */}
-      <motion.div
-        aria-hidden='true'
-        className='absolute -z-10 w-[560px] h-[560px] rounded-full blur-[110px] opacity-30 dark:opacity-20'
-        style={{
-          background: 'radial-gradient(circle, #E07A5F 0%, #84A98C 55%, transparent 75%)',
-          top: '8%',
-          left: '20%',
-        }}
-        initial={{ x: '-50%', y: 0, scale: 0.9 }}
-        animate={{
-          x: ['-55%', '-45%', '-52%', '-50%'],
-          y: [0, 30, -20, 0],
-          scale: [0.9, 1, 0.95, 0.9],
-        }}
-        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-      />
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center px-6 pt-28 pb-16 md:px-10 lg:px-16"
+    >
+      <div className="w-full max-w-7xl mx-auto">
 
-      <div className='flex flex-col items-center lg:items-start text-center lg:text-left'>
-        <motion.div
-          initial={{ opacity: 0, y: -14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className='inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#84A98C]/15 text-[#84A98C] dark:bg-[#84A98C]/20 dark:text-[#A3B18A] text-xs font-semibold mb-6 border border-[#84A98C]/30'
-        >
-          <span className='relative flex h-2 w-2'>
-            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-[#84A98C] opacity-75' />
-            <span className='relative inline-flex rounded-full h-2 w-2 bg-[#84A98C]' />
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-center">
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="max-w-3xl"
+          >
+
+            {/* Availability */}
+            <div className="inline-flex items-center gap-2 mb-7 px-3.5 py-2 rounded-full border border-[#bddda7]/70 bg-white/70 text-sm font-medium text-[#1e2022]">
+              <span className="w-2 h-2 rounded-full bg-[#bddda7]" />
+              Open to freelance & remote work
+            </div>
+
+            {/* Heading */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[0.95] text-[#1e2022]">
+
+              Building thoughtful
+
+              <span className="block">
+                <span className="text-[#7fae65]">
+                  digital
+                </span>{' '}
+
+                <span className="relative inline-block">
+                  <span className="relative z-10 text-[#6da8c2]">
+                    experiences.
+                  </span>
+
+                  <span className="absolute left-0 bottom-1 w-full h-3 bg-[#bddda7]/50 -z-0" />
+                </span>
+              </span>
+
+            </h1>
+
+            {/* Description */}
+            <p className="mt-8 max-w-2xl text-base sm:text-lg leading-8 text-[#6b7280]">
+
+              I'm a{' '}
+              <span className="font-semibold text-[#1e2022]">
+                frontend-focused developer
+              </span>{' '}
+              creating responsive websites and applications with a focus on{' '}
+
+              <span className="font-medium text-[#7fae65]">
+                clarity
+              </span>
+              ,{' '}
+
+              <span className="font-medium text-[#6da8c2]">
+                usability
+              </span>{' '}
+              and purposeful interaction.
+
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap items-center gap-4 mt-9">
+
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#1e2022] text-white font-medium transition-all duration-200 hover:-translate-y-1 hover:bg-[#7fae65]"
+              >
+                View my work
+
+                <ArrowUpRight
+                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-[#1e2022]/20 bg-white/60 text-[#1e2022] font-medium transition-all duration-200 hover:-translate-y-1 hover:border-[#6da8c2] hover:bg-[#aed3e5]/30"
+              >
+                Let's talk
+              </a>
+
+            </div>
+
+            {/* Tech stack */}
+            <div className="flex flex-wrap gap-2 mt-10">
+
+              <span className="px-3 py-1.5 rounded-full bg-[#bddda7]/40 text-[#4f713f] text-xs font-medium">
+                React
+              </span>
+
+              <span className="px-3 py-1.5 rounded-full bg-[#aed3e5]/50 text-[#477c96] text-xs font-medium">
+                JavaScript
+              </span>
+
+              <span className="px-3 py-1.5 rounded-full bg-white border border-black/10 text-[#6b7280] text-xs font-medium">
+                Python
+              </span>
+
+              <span className="px-3 py-1.5 rounded-full bg-[#bddda7]/40 text-[#4f713f] text-xs font-medium">
+                FastAPI
+              </span>
+
+              <span className="px-3 py-1.5 rounded-full bg-[#aed3e5]/50 text-[#477c96] text-xs font-medium">
+                GSAP
+              </span>
+
+            </div>
+
+          </motion.div>
+
+
+          {/* Photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.15,
+              ease: 'easeOut',
+            }}
+            className="relative flex justify-center lg:justify-end"
+          >
+
+            <div className="relative w-full max-w-md">
+
+              {/* Powder blue offset */}
+              <div className="absolute -right-5 -bottom-5 w-full h-full rounded-[2rem] bg-[#aed3e5]" />
+
+              {/* Sage accent */}
+              <div className="absolute -left-6 -top-6 w-20 h-20 rounded-full bg-[#bddda7]" />
+
+              {/* Photo */}
+              <div className="relative overflow-hidden rounded-[2rem] bg-white border border-black/5 shadow-sm">
+
+                <img
+                  src={myPhoto}
+                  alt="Fauzie"
+                  className="w-full aspect-[4/5] object-cover transition-transform duration-700 hover:scale-[1.02]"
+                />
+
+              </div>
+
+              {/* Label */}
+              <div className="absolute -left-5 bottom-8 px-4 py-2.5 rounded-full bg-[#f5ecd9] border border-black/5 text-sm font-medium text-[#1e2022] shadow-sm">
+                <span className="inline-block w-2 h-2 mr-2 rounded-full bg-[#7fae65]" />
+                Frontend Developer
+              </div>
+
+              {/* Small accent card */}
+              <div className="absolute -right-5 top-10 px-4 py-3 rounded-2xl bg-white border border-black/5 shadow-sm">
+
+                <p className="text-xs text-[#6b7280]">
+                  Currently building
+                </p>
+
+                <p className="mt-1 text-sm font-semibold text-[#6da8c2]">
+                  Useful things.
+                </p>
+
+              </div>
+
+            </div>
+
+          </motion.div>
+
+        </div>
+
+
+        {/* Scroll indicator */}
+        <div className="hidden md:flex items-center gap-3 mt-20 text-sm text-[#6b7280]">
+
+          <ArrowDown className="w-4 h-4 text-[#7fae65]" />
+
+          <span>
+            Scroll to explore
           </span>
-          Available for new projects
-        </motion.div>
 
-        <WebGLTextReveal
-          as='h1'
-          className='text-5xl sm:text-6xl font-bold tracking-tight max-w-xl leading-tight text-neutral-900 dark:text-white'
-          onDone={() => setHeadlineDone(true)}
-        >
-          Crafting modern web interfaces with <span className='text-[#E07A5F]'>precision</span> & <span className='text-[#84A98C]'>motion</span>.
-        </WebGLTextReveal>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={headlineDone ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className='mt-6 text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 max-w-lg font-normal'
-        >
-          Hi, I'm Fauzie. I build high-performance React web apps with custom animations, intuitive UX, and clean architecture.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={headlineDone ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className='mt-10 flex items-center gap-4'
-        >
-          <MagneticLink
-            href='#projects'
-            className='px-6 py-3 bg-[#E07A5F] hover:bg-[#38BDF8] text-white rounded-full text-sm font-semibold shadow-sm transition-colors duration-200 inline-block'
-          >
-            View Selected Work
-          </MagneticLink>
-          <MagneticLink
-            href='#contact'
-            className='px-6 py-3 border border-neutral-300 dark:border-neutral-700 hover:border-[#38BDF8] text-neutral-800 dark:text-neutral-200 rounded-full text-sm font-semibold hover:text-[#38BDF8] transition-colors duration-200 inline-block'
-          >
-            Get in Touch
-          </MagneticLink>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={headlineDone ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className='mt-12 flex items-center gap-3 text-xs font-medium text-neutral-500 dark:text-neutral-400'
-        >
-          {['React', 'Tailwind CSS', 'Framer Motion'].map((tech, i) => (
-            <span key={tech} className='flex items-center gap-3'>
-              {i > 0 && <span className='w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600' />}
-              {tech}
-            </span>
-          ))}
-        </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.15 }}
-        className='shrink-0'
-      >
-        <TiltPhotoCard
-          src={myPhoto}
-          alt='Fauzie'
-          className='w-64 sm:w-80 aspect-[3/4]'
-        />
-      </motion.div>
-
-      <motion.a
-        href='#projects'
-        aria-label='Scroll to projects'
-        initial={{ opacity: 0 }}
-        animate={headlineDone ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className='absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-neutral-400 dark:text-neutral-500 hover:text-[#E07A5F] transition-colors'
-      >
-        <span className='text-[11px] font-medium tracking-wide'>Scroll</span>
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ArrowDown className='w-4 h-4' />
-        </motion.span>
-      </motion.a>
     </section>
   )
 }

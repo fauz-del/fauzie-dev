@@ -11,10 +11,12 @@ import Contact from './components/sections/Contact'
 
 export default function App() {
   return (
-    <div className='relative min-h-screen bg-[#FDEDE6] dark:bg-[#0F1115] text-[#1E2022] dark:text-[#F8FAFC] font-sans antialiased transition-colors duration-300 selection:bg-[#E07A5F] selection:text-white'>
+    <div className="relative min-h-screen bg-[#f5ecd9] text-[#1e2022] font-sans antialiased selection:bg-[#bddda7] selection:text-[#1e2022]">
       <BackgroundCanvas />
+
       <Navbar />
-      <main className='relative z-10'>
+
+      <main className="relative z-10">
         <Hero />
         <SelectedWork />
         <TechnicalWork />

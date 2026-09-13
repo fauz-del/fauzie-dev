@@ -1,28 +1,56 @@
 import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import ThemeToggle from '../ui/ThemeToggle'
 
 export default function Navbar() {
   return (
-    <header className='fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 max-w-7xl mx-auto w-full backdrop-blur-md bg-[#FDEDE6]/80 dark:bg-[#0F1115]/80 transition-colors duration-300'>
-      <a href='#' className='text-xl font-bold tracking-tight text-neutral-900 dark:text-white group'>
-        fauzie<span className='text-[#E07A5F] group-hover:text-[#38BDF8] transition-colors duration-200'>.dev</span>
-      </a>
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-10">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
 
-      <nav className='hidden md:flex items-center gap-8 text-sm font-medium text-neutral-600 dark:text-neutral-300'>
-        <a href='#about' className='hover:text-[#38BDF8] transition-colors duration-200'>About</a>
-        <a href='#projects' className='hover:text-[#38BDF8] transition-colors duration-200'>Projects</a>
-        <a href='#experience' className='hover:text-[#38BDF8] transition-colors duration-200'>Experience</a>
-      </nav>
-
-      <div className='flex items-center gap-4'>
-        <ThemeToggle />
+        {/* Logo */}
         <a
-          href='#contact'
-          className='inline-flex items-center gap-1.5 text-sm font-medium px-4 py-2 bg-[#E07A5F] hover:bg-[#38BDF8] text-white rounded-full transition-colors duration-200 shadow-sm'
+          href="#home"
+          className="text-xl font-bold tracking-tight text-[#1e2022]"
         >
-          Let's talk <ArrowUpRight className='w-4 h-4' />
+          fauzie
+          <span className="text-[#bddda7]">.dev</span>
         </a>
+
+        {/* Navigation */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#6b7280]">
+          <a
+            href="#projects"
+            className="transition-colors duration-200 hover:text-[#1e2022]"
+          >
+            Work
+          </a>
+
+          <a
+            href="#about"
+            className="transition-colors duration-200 hover:text-[#1e2022]"
+          >
+            About
+          </a>
+
+          <a
+            href="#experience"
+            className="transition-colors duration-200 hover:text-[#1e2022]"
+          >
+            Journey
+          </a>
+        </nav>
+
+        {/* Contact */}
+        <a
+          href="#contact"
+          className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1e2022] text-white text-sm font-medium transition-transform duration-200 hover:-translate-y-0.5"
+        >
+          Let's talk
+
+          <ArrowUpRight
+            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </a>
+
       </div>
     </header>
   )

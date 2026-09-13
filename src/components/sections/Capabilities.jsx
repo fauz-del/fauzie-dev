@@ -1,92 +1,189 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Globe, LayoutGrid, AppWindow } from 'lucide-react'
-import StackOrbit from '../ui/StackOrbit'
-import JourneyTimeline from '../ui/JourneyTimeline'
+import {
+  Monitor,
+  Layout,
+  Server,
+  ArrowUpRight,
+} from 'lucide-react'
 
 const capabilities = [
   {
-    icon: Globe,
+    number: '01',
+    icon: Monitor,
     title: 'Websites',
-    description: 'Marketing sites, portfolios, business websites and landing pages.',
-    color: '#E07A5F',
+    description:
+      'Responsive websites for businesses, brands, and personal projects, built with attention to structure, performance, and visual detail.',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
   },
   {
-    icon: LayoutGrid,
+    number: '02',
+    icon: Layout,
     title: 'Interfaces',
-    description: 'Responsive interfaces with thoughtful layout, interaction and motion.',
-    color: '#38BDF8',
+    description:
+      'Clean, reusable React interfaces that make complex ideas easier to understand and use.',
+    technologies: ['React', 'Tailwind CSS', 'GSAP'],
   },
   {
-    icon: AppWindow,
+    number: '03',
+    icon: Server,
     title: 'Applications',
-    description: 'Interactive web applications with APIs and backend functionality.',
-    color: '#84A98C',
+    description:
+      'Full-stack applications that connect thoughtful interfaces with APIs, authentication, data, and backend functionality.',
+    technologies: ['Python', 'FastAPI', 'React'],
   },
+]
+
+const technologies = [
+  'HTML',
+  'CSS',
+  'JavaScript',
+  'React',
+  'Tailwind CSS',
+  'GSAP',
+  'Python',
+  'FastAPI',
+  'Git',
 ]
 
 export default function Capabilities() {
   return (
-    <section id='capabilities' className='py-28 px-6 max-w-7xl mx-auto'>
-      <div className='mb-16 text-center'>
-        <span className='text-xs font-semibold tracking-widest text-[#84A98C] uppercase'>
-          What I Build
-        </span>
-        <h2 className='mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-white'>
-          From idea to working website.
-        </h2>
-        <p className='mt-4 max-w-xl mx-auto text-neutral-600 dark:text-neutral-300'>
-          I combine frontend development, interaction and backend experience to create websites that look considered and work properly.
-        </p>
-      </div>
+    <section
+      id="capabilities"
+      className="relative px-6 py-24 md:px-10 md:py-32 lg:px-16"
+    >
+      <div className="max-w-7xl mx-auto">
 
-      <div className='grid grid-cols-1 sm:grid-cols-3 gap-6 mb-24'>
-        {capabilities.map(({ icon: Icon, title, description, color }) => (
-          <motion.div
-            key={title}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className='rounded-3xl p-6 border border-neutral-200/70 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-sm'
-          >
-            <div
-              className='w-11 h-11 rounded-2xl flex items-center justify-center mb-4'
-              style={{ backgroundColor: `${color}20` }}
-            >
-              <Icon className='w-5 h-5' style={{ color }} />
-            </div>
-            <h3 className='font-semibold text-neutral-900 dark:text-white'>{title}</h3>
-            <p className='mt-2 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed'>
-              {description}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
-        <div>
-          <span className='text-xs font-semibold tracking-widest text-[#38BDF8] uppercase'>
-            Stack
-          </span>
-          <h3 className='mt-2 text-2xl font-bold text-neutral-900 dark:text-white'>
-            The tools I work with.
-          </h3>
-          <p className='mt-3 text-neutral-600 dark:text-neutral-300 max-w-sm'>
-            Hover a node to see what it is. Inner ring is my day-to-day frontend stack; outer ring is backend and graphics work I'm building experience in.
+        {/* Section intro */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="max-w-2xl mb-14"
+        >
+          <p className="text-sm font-medium tracking-widest uppercase text-[#6b7280] mb-4">
+            Capabilities
           </p>
-          <StackOrbit />
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-[#1e2022]">
+            What I build.
+          </h2>
+
+          <p className="mt-6 text-base md:text-lg leading-8 text-[#6b7280]">
+            My work spans from focused websites to interactive interfaces
+            and full-stack applications.
+          </p>
+        </motion.div>
+
+        {/* Capabilities */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {capabilities.map((capability, index) => {
+            const Icon = capability.icon
+
+            return (
+              <motion.article
+                key={capability.number}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.08,
+                  ease: 'easeOut',
+                }}
+                className="group p-7 md:p-8 rounded-3xl bg-white border border-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              >
+                {/* Number + icon */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-[#6b7280]">
+                    {capability.number}
+                  </span>
+
+                  <div className="w-11 h-11 flex items-center justify-center rounded-full bg-[#f5ecd9]">
+                    <Icon className="w-5 h-5 text-[#1e2022]" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <h3 className="mt-9 text-2xl font-semibold tracking-tight text-[#1e2022]">
+                  {capability.title}
+                </h3>
+
+                <p className="mt-4 text-sm md:text-base leading-7 text-[#6b7280]">
+                  {capability.description}
+                </p>
+
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mt-7">
+                  {capability.technologies.map((technology) => (
+                    <span
+                      key={technology}
+                      className="px-3 py-1.5 rounded-full bg-[#f5ecd9]/70 border border-black/5 text-xs font-medium text-[#1e2022]"
+                    >
+                      {technology}
+                    </span>
+                  ))}
+                </div>
+              </motion.article>
+            )
+          })}
         </div>
 
-        <div>
-          <span className='text-xs font-semibold tracking-widest text-[#E07A5F] uppercase'>
-            Journey
+        {/* Tech stack */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 pt-10 border-t border-black/10"
+        >
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+            
+            <div>
+              <p className="text-sm font-medium tracking-widest uppercase text-[#6b7280]">
+                Tools & Technologies
+              </p>
+
+              <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-[#1e2022]">
+                The tools behind the work.
+              </h3>
+            </div>
+
+            <div className="flex flex-wrap gap-2 max-w-2xl md:justify-end">
+              {technologies.map((technology, index) => (
+                <span
+                  key={technology}
+                  className={`px-4 py-2 rounded-full border text-sm transition-colors duration-200 ${
+                    index % 3 === 0
+                      ? 'bg-[#bddda7]/40 border-[#bddda7]/60'
+                      : index % 3 === 1
+                        ? 'bg-[#aed3e5]/40 border-[#aed3e5]/60'
+                        : 'bg-white border-black/10'
+                  } text-[#1e2022]`}
+                >
+                  {technology}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Small CTA */}
+        <motion.a
+          href="#contact"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="group inline-flex items-center gap-2 mt-12 text-sm font-medium text-[#1e2022]"
+        >
+          Have a project in mind?
+          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#bddda7] transition-transform duration-200 group-hover:translate-x-1">
+            <ArrowUpRight className="w-4 h-4" />
           </span>
-          <h3 className='mt-2 text-2xl font-bold text-neutral-900 dark:text-white mb-8'>
-            How I got here.
-          </h3>
-          <JourneyTimeline />
-        </div>
+        </motion.a>
+
       </div>
     </section>
   )

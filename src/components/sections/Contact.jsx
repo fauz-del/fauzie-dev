@@ -1,132 +1,129 @@
 import React, { useState } from 'react'
+import { ArrowUpRight, Check, Copy } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Copy, Check } from 'lucide-react'
-import MagneticLink from '../ui/MagneticLink'
-import WebGLTextReveal from '../ui/WebGLTextReveal'
-
-const email = 'fauziewebdev@gmail.com'
-
-const socials = [
-  { label: 'Instagram', href: 'https://instagram.com/fauzie_dev' },
-  { label: 'GitHub', href: 'https://github.com/fauz-del' },
-]
 
 export default function Contact() {
   const [copied, setCopied] = useState(false)
-  const [headlineDone, setHeadlineDone] = useState(false)
 
-  const handleCopy = () => {
-    // Copy address without blocking mailto link behavior
-    navigator.clipboard.writeText(email)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1600)
+  const email = 'fauziewebdev@gmail.com'
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopied(true)
+
+      setTimeout(() => {
+        setCopied(false)
+      }, 2000)
+    } catch (error) {
+      console.error('Failed to copy email:', error)
+    }
   }
 
   return (
-    <section id='contact' className='relative py-32 px-6 max-w-4xl mx-auto text-center overflow-hidden'>
-      {/* Ambient bloom background */}
-      <motion.div
-        aria-hidden='true'
-        className='absolute -z-10 w-[820px] h-[820px] rounded-full blur-[130px] opacity-45 dark:opacity-35'
-        style={{
-          background: 'radial-gradient(circle, #38BDF8 0%, #E07A5F 45%, #F4A261 70%, transparent 80%)',
-          top: '-10%',
-          left: '50%',
-        }}
-        initial={{ x: '-50%', y: 0, scale: 0.85 }}
-        animate={{
-          x: ['-55%', '-45%', '-52%', '-50%'],
-          y: [0, 40, -25, 0],
-          scale: [0.85, 1.05, 0.95, 0.85],
-        }}
-        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
-      />
+    <section
+      id="contact"
+      className="relative px-6 pt-24 pb-12 md:px-10 md:pt-32 lg:px-16"
+    >
+      <div className="max-w-7xl mx-auto">
 
-      <span className='text-xs font-semibold tracking-widest text-[#E07A5F] uppercase'>
-        Contact
-      </span>
-
-      <WebGLTextReveal
-        as='h2'
-        playOnView
-        className='mt-4 text-4xl sm:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white'
-        onDone={() => setHeadlineDone(true)}
-      >
-        Let's build something.
-      </WebGLTextReveal>
-
-      <motion.p
-        initial={{ opacity: 0, y: 12 }}
-        animate={headlineDone ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5 }}
-        className='mt-5 text-lg text-neutral-600 dark:text-neutral-300 max-w-md mx-auto'
-      >
-        Have a project, website or idea in mind? I'd love to hear about it.
-      </motion.p>
-
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={headlineDone ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className='mt-12 relative inline-block'
-      >
-        <MagneticLink
-          href={`mailto:${email}`}
-          onClick={handleCopy}
-          strength={0.15}
-          className='text-2xl sm:text-4xl font-semibold text-neutral-900 dark:text-white hover:text-[#38BDF8] transition-colors duration-200 inline-flex items-center gap-3 cursor-pointer'
+        {/* Main contact */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="rounded-[2rem] bg-[#1e2022] text-white px-7 py-12 md:px-12 md:py-16 lg:px-16"
         >
-          {email}
-          {copied ? (
-            <Check className='w-6 h-6 text-[#84A98C]' />
-          ) : (
-            <Copy className='w-6 h-6 opacity-40' />
-          )}
-        </MagneticLink>
+          <div className="max-w-4xl">
 
-        <span
-          className={`absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-medium px-2.5 py-1 rounded-full bg-neutral-900 text-white transition-opacity duration-300 ${
-            copied ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        >
-          Copied!
-        </span>
-      </motion.div>
+            <p className="text-sm font-medium tracking-widest uppercase text-[#aed3e5] mb-6">
+              Contact
+            </p>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={headlineDone ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className='mt-14 flex items-center justify-center gap-8'
-      >
-        {socials.map((social) => (
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-[1]">
+              Let's build
+              <span className="block text-[#bddda7]">
+                something useful.
+              </span>
+            </h2>
+
+            <p className="mt-7 max-w-2xl text-base md:text-lg leading-8 text-white/65">
+              Have a project, idea, or opportunity you'd like to discuss?
+              I'd be happy to hear about it.
+            </p>
+
+            {/* Email */}
+            <div className="relative inline-flex items-center gap-3 mt-9">
+              <a
+                href={`mailto:${email}`}
+                className="text-lg md:text-2xl font-medium underline underline-offset-8 decoration-white/30 hover:decoration-[#bddda7] transition-colors duration-200"
+              >
+                {email}
+              </a>
+
+              <button
+                type="button"
+                onClick={copyEmail}
+                aria-label="Copy email address"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-[#bddda7] hover:text-[#1e2022] transition-colors duration-200"
+              >
+                {copied ? (
+                  <Check className="w-4 h-4" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
+              </button>
+
+              {copied && (
+                <span className="absolute left-0 top-full mt-3 text-xs text-[#bddda7]">
+                  Email copied
+                </span>
+              )}
+            </div>
+
+            {/* Social links */}
+            <div className="flex flex-wrap gap-4 mt-12">
+              <a
+                href="https://github.com/fauz-del"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/15 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors duration-200"
+              >
+                GitHub
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+
+              <a
+                href="https://www.instagram.com/fauzie_dev?stkn=MXVzZ3gxbzdxYTVwYw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/15 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors duration-200"
+              >
+                Instagram
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+          </div>
+        </motion.div>
+
+        {/* Footer */}
+        <footer className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-8 text-sm text-[#6b7280]">
+          <p>
+            © {new Date().getFullYear()} Fauzie. Built with React.
+          </p>
+
           <a
-            key={social.label}
-            href={social.href}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='group inline-flex items-center gap-1 text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-[#38BDF8] transition-colors duration-200'
+            href="#home"
+            className="inline-flex items-center gap-2 hover:text-[#1e2022] transition-colors duration-200"
           >
-            {social.label}
-            <ArrowUpRight className='w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5' />
+            Back to top
+            <ArrowUpRight className="w-4 h-4 -rotate-45" />
           </a>
-        ))}
-      </motion.div>
+        </footer>
 
-      <footer className='relative mt-24 pt-8 border-t border-neutral-200/60 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-neutral-500 dark:text-neutral-400'>
-        <div>
-          <span className='font-semibold text-neutral-800 dark:text-neutral-200'>fauzie</span>
-          <span className='mx-2'>·</span>
-          Web Developer
-          <span className='mx-2'>·</span>
-          © 2026
-        </div>
-        <nav className='flex items-center gap-6'>
-          <a href='#projects' className='hover:text-[#38BDF8] transition-colors'>Work</a>
-          <a href='#about' className='hover:text-[#38BDF8] transition-colors'>About</a>
-          <a href='#contact' className='hover:text-[#38BDF8] transition-colors'>Contact</a>
-        </nav>
-      </footer>
+      </div>
     </section>
   )
 }

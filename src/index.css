@@ -3,13 +3,23 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  --color-sage: #bddda7;
+  --color-sky: #aed3e5;
+  --color-cream: #f5ecd9;
+  --color-white: #ffffff;
+
+  --color-text: #1e2022;
+  --color-text-secondary: #6b7280;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #FDEDE6;
-  color: #1E2022;
+  background-color: var(--color-cream);
+  color: var(--color-text);
   font-family: system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
