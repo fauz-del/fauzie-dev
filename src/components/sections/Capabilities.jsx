@@ -42,7 +42,7 @@ const technologies = [
   'Tailwind CSS',
   'GSAP',
   'Python',
-  'FastAPI',
+  'FIGMA Design To Website',
   'Git',
 ]
 

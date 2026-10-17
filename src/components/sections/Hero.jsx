@@ -1,7 +1,7 @@
 import React from 'react'
 import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import myPhoto from '../../assets/my-photo.jpeg'
+import myAvatar from '../../assets/avatar.jpeg'
 
 export default function Hero() {
   return (
@@ -108,7 +108,7 @@ export default function Hero() {
               </span>
 
               <span className="px-3 py-1.5 rounded-full bg-[#bddda7]/40 text-[#4f713f] text-xs font-medium">
-                FastAPI
+                FIGMA DESIGN TO WEBSITE
               </span>
 
               <span className="px-3 py-1.5 rounded-full bg-[#aed3e5]/50 text-[#477c96] text-xs font-medium">
@@ -144,7 +144,7 @@ export default function Hero() {
               <div className="relative overflow-hidden rounded-[2rem] bg-white border border-black/5 shadow-sm">
 
                 <img
-                  src={myPhoto}
+                  src={myAvatar}
                   alt="Fauzie"
                   className="w-full aspect-[4/5] object-cover transition-transform duration-700 hover:scale-[1.02]"
                 />
